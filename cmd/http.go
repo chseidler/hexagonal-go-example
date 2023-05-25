@@ -1,12 +1,12 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
 
+	server2 "github.com/chseidler/hexagonal-go-example/adapters/web/server"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +21,10 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("http called")
+		server := server2.MakeNewWebserver()
+		server.Service = &productService
+		fmt.Println("Webserver has been started")
+		server.Serve()
 	},
 }
 
